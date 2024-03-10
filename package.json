@@ -1,0 +1,32 @@
+{
+  "name": "@dscvr-one/frames-adapter",
+  "version": "1.0.0-beta2",
+  "description": "Frames adapter to validate in DSCVR frame instances",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/dscvr-one/frames-adapter#readme",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "node --loader ts-node/esm src/test.ts"
+  },
+  "keywords": [
+    "dscvr",
+    "graphql",
+    "adapter",
+    "urql"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@urql/core": "^4.3.0"
+  },
+  "devDependencies": {
+    "@open-frames/types": "^0.0.6",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  }
+}
