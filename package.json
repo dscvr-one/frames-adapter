@@ -1,6 +1,6 @@
 {
   "name": "@dscvr-one/frames-adapter",
-  "version": "1.0.0-beta2",
+  "version": "1.0.0",
   "description": "Frames adapter to validate in DSCVR frame instances",
   "type": "module",
   "main": "./dist/index.js",

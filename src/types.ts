@@ -6,7 +6,6 @@ import type {
 export type DscvrUntrustedData = OpenFramesUntrustedData & {
   dscvrId: string;
   contentId?: bigint | null;
-  // TODO PR to OF: state to OF for  this type OpenFramesUntrustedData
   state?: string;
 };
 export const dscvrClientProtocolPrefix = 'dscvr@' as const;

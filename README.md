@@ -55,17 +55,12 @@ export const isDscvrFrameActionPayload = (
 export const getDscvrFrameMessage = async (
   frameActionPayload: DscvrFramesRequest
 ) => {
-  const { actionBody, verifiedDscvrId, verifiedContentId } =
-    await validateFramesPost({
-      ...frameActionPayload,
-      clientProtocol: frameActionPayload.clientProtocol as DscvrClientProtocol,
-    });
+  const result = await validateFramesPost({
+    ...frameActionPayload,
+    clientProtocol: frameActionPayload.clientProtocol as DscvrClientProtocol,
+  });
 
-  return {
-    ...actionBody,
-    verifiedDscvrId,
-    verifiedContentId,
-  };
+  return result;
 };
 ```
 

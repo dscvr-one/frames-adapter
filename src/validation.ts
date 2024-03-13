@@ -83,7 +83,7 @@ const validateUntrustedData = (
     validateUntrustedDataValue(validatedResult.state, untrustedData.state) &&
     validateUntrustedDataValue(
       validatedResult.timestamp,
-      untrustedData.timestamp
+      Number(untrustedData.timestamp) // TODO: remove this when Proxy is fixed
     )
   ) {
     return true;
