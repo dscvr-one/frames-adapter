@@ -1,4 +1,3 @@
-import { OpenFramesUntrustedData } from '@open-frames/types';
 import { Client, cacheExchange, fetchExchange } from '@urql/core';
 import {
   type DscvrFramesRequest,
@@ -14,7 +13,7 @@ interface ValidatedQueryResult {
     id: string;
   };
   content?: {
-    id: bigint;
+    id: string;
   };
   state: string | null;
   inputText: string | null;
@@ -115,7 +114,7 @@ export const validateFramesPost = async (
 
   const user = queryResult.user;
   const content = queryResult.content;
-  const hasContent = typeof payload.untrustedData.contentId === 'bigint';
+  const hasContent = !!payload.untrustedData.contentId;
   if (!content && hasContent) {
     throw new Error('Invalid content');
   }

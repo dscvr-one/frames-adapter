@@ -5,7 +5,7 @@ import type {
 
 export type DscvrUntrustedData = OpenFramesUntrustedData & {
   dscvrId: string;
-  contentId?: bigint | null;
+  contentId?: string | null;
   state?: string;
 };
 export const dscvrClientProtocolPrefix = 'dscvr@' as const;
@@ -20,7 +20,7 @@ export interface DscvrFramesRequest {
 
 export type DscvrValidationResponse = {
   validatedDscvrId: string;
-  validatedContentId: bigint | null;
+  validatedContentId: string | null;
   frameUrl: string;
   timestamp: number;
   buttonIndex: number;
