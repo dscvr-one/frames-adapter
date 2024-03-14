@@ -1,6 +1,8 @@
-# Frames Adapter
+# frames-adapter
 
-Frames Adapter is a small typescript library designed to validate the payload from a signed frames POST call for DSCVR frames.
+frames-adapter is a small typescript library that can be used as an adapter to DSCVR's protocol from different frames frameworks. Currently, only frames.js is supported.
+
+The library provides a couple of helper methods to validate the trusted message data of a frame action and also to determine if a frame is using the DSCVR protocol.
 
 ## Installation
 
@@ -87,6 +89,12 @@ Expected payload should have the next structure
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvement, feel free to open an issue or submit a pull request.
+
+_Note_:
+
+1. Please contribute using [GitHub Flow](https://web.archive.org/web/20191104103724/https://guides.github.com/introduction/flow/)
+2. Commits & PRs will be allowed only if the commit messages & PR titles follow the [conventional commit standard](https://www.conventionalcommits.org/), _read more about it [here](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum)_
+3. PS. Ensure your commits are signed. _[Read why](https://withblue.ink/2020/05/17/how-and-why-to-sign-git-commits.html)_
 
 ### Take in count
 
