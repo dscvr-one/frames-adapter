@@ -11,7 +11,10 @@
   ],
   "scripts": {
     "build": "tsup",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "shipjs prepare",
+    "release:dry": "shipjs prepare --dry-run",
+    "release:auto": "shipjs prepare --yes"
   },
   "keywords": [
     "dscvr",
@@ -29,6 +32,7 @@
     "@open-frames/types": "^0.0.6",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
+    "shipjs": "0.26.3",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"
