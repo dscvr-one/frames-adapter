@@ -11,12 +11,12 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "node --loader ts-node/esm src/test.ts"
+    "prepare": "husky"
   },
   "keywords": [
     "dscvr",
-    "graphql",
     "adapter",
+    "graphql",
     "urql"
   ],
   "license": "MIT",
@@ -24,7 +24,11 @@
     "@urql/core": "^4.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.1.0",
+    "@commitlint/config-conventional": "^19.1.0",
     "@open-frames/types": "^0.0.6",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"

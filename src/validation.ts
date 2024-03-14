@@ -44,43 +44,25 @@ export const validateClientProtocol = (clientProtocol: string) => {
   return clientProtocol.startsWith(dscvrClientProtocolPrefix);
 };
 
-const validateUntrustedDataValue = (
+const validateField = (
   validated: ValidationType,
   untrusted: ValidationType
 ): boolean => {
-  if (!validated && !untrusted) {
-    return true;
-  }
-  if (validated && untrusted && validated === untrusted) {
-    return true;
-  }
-  return false;
+  return (!validated && !untrusted) || validated === untrusted;
 };
 
-const validateUntrustedData = (
+const validateData = (
   validatedResult: DscvrValidationResponse,
   untrustedData: DscvrUntrustedData
 ): boolean => {
   if (
-    validateUntrustedDataValue(
-      validatedResult.validatedDscvrId,
-      untrustedData.dscvrId
-    ) &&
-    validateUntrustedDataValue(
-      validatedResult.validatedContentId,
-      untrustedData.contentId
-    ) &&
-    validateUntrustedDataValue(
-      validatedResult.buttonIndex,
-      untrustedData.buttonIndex
-    ) &&
-    validateUntrustedDataValue(validatedResult.frameUrl, untrustedData.url) &&
-    validateUntrustedDataValue(
-      validatedResult.inputText,
-      untrustedData.inputText
-    ) &&
-    validateUntrustedDataValue(validatedResult.state, untrustedData.state) &&
-    validateUntrustedDataValue(
+    validateField(validatedResult.dscvrId, untrustedData.dscvrId) &&
+    validateField(validatedResult.contentId, untrustedData.contentId) &&
+    validateField(validatedResult.buttonIndex, untrustedData.buttonIndex) &&
+    validateField(validatedResult.url, untrustedData.url) &&
+    validateField(validatedResult.inputText, untrustedData.inputText) &&
+    validateField(validatedResult.state, untrustedData.state) &&
+    validateField(
       validatedResult.timestamp,
       Number(untrustedData.timestamp) // TODO: remove this when Proxy is fixed
     )
@@ -120,16 +102,16 @@ export const validateFramesPost = async (
   }
 
   const validatedResult: DscvrValidationResponse = {
-    validatedDscvrId: user.id,
-    validatedContentId: content?.id ?? null,
-    inputText: queryResult.inputText ?? null,
+    dscvrId: user.id,
+    contentId: content?.id,
+    inputText: queryResult.inputText || undefined,
     buttonIndex: queryResult.buttonIndex,
-    state: queryResult.state,
-    frameUrl: queryResult.url,
+    state: queryResult.state || undefined,
+    url: queryResult.url,
     timestamp: Number(queryResult.timestamp),
   };
 
-  if (!validateUntrustedData(validatedResult, payload.untrustedData)) {
+  if (!validateData(validatedResult, payload.untrustedData)) {
     throw new Error('Invalid payload');
   }
 
