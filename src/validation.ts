@@ -29,14 +29,14 @@ export const validateClientProtocol = (clientProtocol: string) => {
 
 const validateField = (
   validated: ValidationType,
-  untrusted: ValidationType
+  untrusted: ValidationType,
 ): boolean => {
   return (!validated && !untrusted) || validated === untrusted;
 };
 
 const validateData = (
   validatedResult: DscvrValidationResponse,
-  untrustedData: DscvrUntrustedData
+  untrustedData: DscvrUntrustedData,
 ): boolean => {
   const untrustedDataTransformed: DscvrUntrustedData = {
     ...untrustedData,
@@ -62,7 +62,7 @@ const validateData = (
 
 export const validateFramesPost = async (
   payload: DscvrFramesRequest,
-  apiUrl = DEFAULT_DSCVR_API_URL
+  apiUrl = DEFAULT_DSCVR_API_URL,
 ): Promise<DscvrValidationResponse> => {
   const client = useUrqlClient(apiUrl);
 
