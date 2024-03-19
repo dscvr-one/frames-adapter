@@ -1,8 +1,8 @@
-export {
-  type DscvrClientProtocol,
-  type DscvrFramesRequest,
-  type DscvrUntrustedData,
-  type DscvrValidationResponse,
-  dscvrClientProtocolPrefix,
+export type {
+  DscvrClientProtocol,
+  DscvrFramesRequest,
+  DscvrUntrustedData,
+  DscvrValidationResponse,
 } from './types';
+export { dscvrClientProtocolPrefix } from './constants';
 export { validateClientProtocol, validateFramesPost } from './validation';

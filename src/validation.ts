@@ -1,27 +1,14 @@
-import {
-  type DscvrFramesRequest,
-  type DscvrValidationResponse,
-  dscvrClientProtocolPrefix,
+import type {
   DscvrUntrustedData,
+  DscvrFramesRequest,
+  DscvrValidationResponse,
+  ValidationType,
+  ValidatedQueryResult,
 } from './types';
+import { dscvrClientProtocolPrefix } from './constants';
 import { DEFAULT_DSCVR_API_URL } from './default';
 import { useUrqlClient } from './clients';
 import { validationQuery } from './queries/validation.query';
-
-type ValidationType = string | number | bigint | null | undefined;
-interface ValidatedQueryResult {
-  user: {
-    id: string;
-  };
-  content?: {
-    id: string;
-  };
-  state: string | null;
-  inputText: string | null;
-  timestamp: string;
-  url: string;
-  buttonIndex: number;
-}
 
 export const validateClientProtocol = (clientProtocol: string) => {
   return clientProtocol.startsWith(dscvrClientProtocolPrefix);
