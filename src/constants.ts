@@ -1,0 +1,1 @@
+export const dscvrClientProtocolPrefix = 'dscvr@' as const;
