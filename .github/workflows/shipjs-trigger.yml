@@ -25,12 +25,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          check-latest: true
-          cache: 'npm'
           registry-url: 'https://npm.pkg.github.com/'
 
       - name: Install dependencies 🚀
-        run: npm ci --prefer-offline --no-audit
+        run: npm i --prefer-offline --no-audit
 
       - name: Trigger a release 🥳
         run: npx shipjs trigger
