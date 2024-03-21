@@ -19,8 +19,15 @@ export interface DscvrFramesRequest {
   trustedData: OpenFramesTrustedData;
 }
 
-export interface DscvrValidationResponse extends DscvrUntrustedData {}
+export type UnknownUntrustedData = OpenFramesUntrustedData & unknown;
 
+export interface UnknownFrameRequest {
+  clientProtocol?: string;
+  untrustedData: UnknownUntrustedData;
+  trustedData: OpenFramesTrustedData;
+}
+
+export interface DscvrValidationResponse extends DscvrUntrustedData {}
 
 export type ValidationType = string | number | bigint | null | undefined;
 export interface ValidatedQueryResult {

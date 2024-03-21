@@ -4,15 +4,13 @@ import type {
   DscvrValidationResponse,
   ValidationType,
   ValidatedQueryResult,
+  UnknownFrameRequest,
+  UnknownUntrustedData,
 } from './types';
 import { dscvrClientProtocolPrefix } from './constants';
 import { DEFAULT_DSCVR_API_URL } from './default';
 import { useUrqlClient } from './clients';
 import { validationQuery } from './queries/validation.query';
-
-export const validateClientProtocol = (clientProtocol: string) => {
-  return clientProtocol.startsWith(dscvrClientProtocolPrefix);
-};
 
 const validateField = (
   validated: ValidationType,
@@ -25,21 +23,13 @@ const validateData = (
   validatedResult: DscvrValidationResponse,
   untrustedData: DscvrUntrustedData,
 ): boolean => {
-  const untrustedDataTransformed: DscvrUntrustedData = {
-    ...untrustedData,
-    timestamp: Number(untrustedData.timestamp), // TODO: remove this when Proxy is fixed
-  };
-
   const isValidKey = (k: string): k is keyof DscvrValidationResponse =>
     k in validatedResult;
 
-  const untrustedDataKeys = Object.keys(untrustedDataTransformed);
+  const untrustedDataKeys = Object.keys(untrustedData);
   const isValid = untrustedDataKeys.reduce((valid, key) => {
     if (isValidKey(key)) {
-      return (
-        valid &&
-        validateField(validatedResult[key], untrustedDataTransformed[key])
-      );
+      return valid && validateField(validatedResult[key], untrustedData[key]);
     }
     return false;
   }, true);
@@ -47,7 +37,38 @@ const validateData = (
   return isValid;
 };
 
-export const validateFramesPost = async (
+export const isDscvrFrameUntrustedData = (
+  untrustedData: UnknownUntrustedData,
+): untrustedData is DscvrUntrustedData => {
+  return (
+    'dscvrId' in untrustedData &&
+    typeof untrustedData.dscvrId === 'string' &&
+    (!('contentId' in untrustedData) ||
+      typeof untrustedData.contentId === 'string' ||
+      untrustedData.contentId === null ||
+      untrustedData.contentId === undefined) &&
+    (!('state' in untrustedData) ||
+      typeof untrustedData.state === 'string' ||
+      untrustedData.state === null ||
+      untrustedData.state === undefined)
+  );
+};
+
+export const validateClientProtocol = (clientProtocol: string) => {
+  return clientProtocol.startsWith(dscvrClientProtocolPrefix);
+};
+
+export const isDscvrFrameMessage = (
+  frameActionPayload: UnknownFrameRequest,
+): frameActionPayload is DscvrFramesRequest => {
+  return (
+    !!frameActionPayload.clientProtocol &&
+    !!validateClientProtocol(frameActionPayload.clientProtocol) &&
+    isDscvrFrameUntrustedData(frameActionPayload.untrustedData)
+  );
+};
+
+export const validateDscvrFrameMessage = async (
   payload: DscvrFramesRequest,
   apiUrl = DEFAULT_DSCVR_API_URL,
 ): Promise<DscvrValidationResponse> => {
