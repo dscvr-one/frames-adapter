@@ -1,6 +1,6 @@
 # frames-adapter
 
-frames-adapter is a small typescript library that can be used as an adapter to DSCVR's protocol from different frames frameworks. Currently, only frames.js is supported.
+frames-adapter is a small typescript library that can be used as an adapter to DSCVR's protocol from different frames frameworks.
 
 The library provides a couple of helper methods to validate the trusted message data of a frame action and also to determine if a frame is using the DSCVR protocol.
 
@@ -46,7 +46,7 @@ import {
 } from '@dscvr-one/frames-adapter';
 
 export const isDscvrFrameActionPayload = (
-  frameActionPayload: FrameActionPayload
+  frameActionPayload: FrameActionPayload,
 ): frameActionPayload is DscvrFramesRequest => {
   return (
     !!frameActionPayload.clientProtocol &&
@@ -55,7 +55,7 @@ export const isDscvrFrameActionPayload = (
 };
 
 export const getDscvrFrameMessage = async (
-  frameActionPayload: DscvrFramesRequest
+  frameActionPayload: DscvrFramesRequest,
 ) => {
   const result = await validateFramesPost({
     ...frameActionPayload,
@@ -98,7 +98,6 @@ _Note_:
 
 ### Take in count
 
-- `@open-frames/types` should remain in the `devDependencies` section of the **package.json** file, otherwise when imported by frames.js XMPT will have conflicts in typescript.
 - type `DscvrUntrustedData` in file **src/types.ts** should be a type with the `&&` operator and not an interface with extend, otherwise a [type predicate](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) wont work e.g:
 
 ```typescript

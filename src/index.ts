@@ -5,4 +5,9 @@ export type {
   DscvrValidationResponse,
 } from './types';
 export { dscvrClientProtocolPrefix } from './constants';
-export { validateClientProtocol, validateFramesPost } from './validation';
+export {
+  isDscvrFrameMessage,
+  isDscvrFrameUntrustedData,
+  validateClientProtocol,
+  validateDscvrFrameMessage,
+} from './validation';
