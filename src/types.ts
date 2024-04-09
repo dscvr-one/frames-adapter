@@ -7,6 +7,8 @@ import { dscvrClientProtocolPrefix } from './constants';
 export type DscvrUntrustedData = OpenFramesUntrustedData & {
   dscvrId: string;
   contentId?: string;
+  transactionId?: string;
+  address?: string;
   state?: string;
 };
 
@@ -42,4 +44,6 @@ export interface ValidatedQueryResult {
   timestamp: string;
   url: string;
   buttonIndex: number;
+  transactionId: string | null;
+  address: string | null;
 }

@@ -6,12 +6,14 @@ export const validationQuery = `#graphql
         },
         content {
             id
-        }
+        },
         buttonIndex,
         state,
         url,
         timestamp,
         inputText,
+        transactionId,
+        address,
       }
     }
 `;

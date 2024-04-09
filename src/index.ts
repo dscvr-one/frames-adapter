@@ -3,6 +3,7 @@ export type {
   DscvrFramesRequest,
   DscvrUntrustedData,
   DscvrValidationResponse,
+  UnknownFrameRequest,
 } from './types';
 export { dscvrClientProtocolPrefix } from './constants';
 export {
