@@ -98,6 +98,8 @@ export const validateDscvrFrameMessage = async (
     contentId: content?.id,
     inputText: queryResult.inputText || undefined,
     buttonIndex: queryResult.buttonIndex,
+    transactionId: queryResult.transactionId || undefined,
+    address: queryResult.address || undefined,
     state: queryResult.state || undefined,
     url: queryResult.url,
     timestamp: Number(queryResult.timestamp),
