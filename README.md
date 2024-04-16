@@ -78,7 +78,9 @@ Expected payload should have the next structure
     "url": "...",
     "timestamp": 123,
     "buttonIndex": 1,
-    "inputText": "..."
+    "inputText": "...",
+    "address": "...",
+    "transactionId": "..."
   },
   "trustedData": {
     "messageBytes": "..."
